@@ -5,3 +5,4 @@ dist/*
 .github/*
 README.md
 tsconfig.json
+postcss.config.js

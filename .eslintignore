@@ -2,3 +2,6 @@ node_modules/*
 out/*
 .next
 dist/*
+postcss.config.js
+next.config.js
+tailwind.config.js
