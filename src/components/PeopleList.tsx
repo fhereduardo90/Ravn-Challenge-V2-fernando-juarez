@@ -1,5 +1,5 @@
-import Indicator from '../Indicator';
-import { IPerson } from '../../interfaces';
+import Indicator from './Indicator';
+import { IPerson } from '../interfaces';
 
 type PeopleListProps = {
   isLoading?: boolean;

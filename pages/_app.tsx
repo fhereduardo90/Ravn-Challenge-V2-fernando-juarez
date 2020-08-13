@@ -1,6 +1,8 @@
-import '../public/styles/tailwind.sass';
+import { ApolloProvider } from '@apollo/client';
 import Navbar from '../src/components/Navbar';
 import Head from 'next/head';
+import { client } from '../src/graphql';
+import '../public/styles/tailwind.css';
 
 const MyApp = ({ Component, pageProps }) => (
   <>
@@ -15,7 +17,9 @@ const MyApp = ({ Component, pageProps }) => (
     </Head>
     <div className="w-screen h-screen">
       <Navbar />
-      <Component {...pageProps} />
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
     </div>
   </>
 );
