@@ -76,6 +76,7 @@ const Home = () => {
           }}
           hasMore={hasMore}
           fetchMore={fetchMoreData}
+          selected={currentPerson}
         />
       </div>
       <div className="xl:w-4/5 lg:w-3/5 lg:block hidden ">

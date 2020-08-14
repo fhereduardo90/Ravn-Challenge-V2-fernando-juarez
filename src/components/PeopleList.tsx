@@ -9,6 +9,7 @@ type PeopleListProps = {
   hasMore?: boolean;
   fetchMore?: () => void;
   onSelect?: (id: string) => void;
+  selected?: PersonType;
 };
 
 const defaultProps: PeopleListProps = {
@@ -21,8 +22,10 @@ const defaultProps: PeopleListProps = {
 const PersonField = ({
   data,
   onClick,
+  selected,
 }: {
   data: PersonType;
+  selected?: PersonType;
   onClick: (id: string) => void;
 }) => {
   const specie = data.species[0]?.name;
@@ -31,7 +34,12 @@ const PersonField = ({
     specie && homeworld ? `${specie} from ${homeworld}` : 'No description';
 
   return (
-    <li onClick={() => onClick(data.id)} className="pl-8 cursor-pointer">
+    <li
+      onClick={() => onClick(data.id)}
+      className={`pl-8 cursor-pointer ${
+        selected?.id === data.id ? 'bg-gray-400' : 'hover:bg-gray-100'
+      }`}
+    >
       <div className="flex flex-wrap flex-row h-full items-center py-8 border-b-2 border-light">
         <div className="w-4/5 pr-8">
           <p className="text-2xl lg:text-1xl md:text-xl sm:text-lg text-dark font-bold leading-8">
@@ -58,6 +66,7 @@ const PeopleList: React.FC<PeopleListProps> = ({
   hasMore,
   fetchMore,
   onSelect,
+  selected,
 }: PeopleListProps) => {
   return (
     <ul>
@@ -72,7 +81,12 @@ const PeopleList: React.FC<PeopleListProps> = ({
         }
       >
         {data.map((d) => (
-          <PersonField key={d.id} data={d} onClick={onSelect} />
+          <PersonField
+            key={d.id}
+            data={d}
+            onClick={onSelect}
+            selected={selected}
+          />
         ))}
       </InfiniteScroll>
       {!isLoading && error && (
