@@ -39,6 +39,12 @@ const Home = () => {
     }
   }, [allPersons?.length]);
 
+  useEffect(() => {
+    if (width < BREAKPOINTS.lg && currentPerson) {
+      setPerson(null);
+    }
+  }, [width]);
+
   const fetchMoreData = () => {
     if (allPersons?.length) {
       fetchMore({
