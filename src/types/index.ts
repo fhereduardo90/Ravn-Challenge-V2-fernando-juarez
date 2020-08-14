@@ -1,10 +1,10 @@
-export interface IVehicle {
+export type VehicleType = {
   id: string;
   maxAtmospheringSpeed: number;
   name: string;
-}
+};
 
-export interface IPerson {
+export type PersonType = {
   id: string;
   name: string;
   birthYear?: string;
@@ -19,5 +19,5 @@ export interface IPerson {
     id: string;
     name: string;
   };
-  vehicles?: IVehicle[];
-}
+  vehicles?: VehicleType[];
+};

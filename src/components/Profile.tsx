@@ -1,8 +1,8 @@
-import { IPerson } from '../interfaces';
+import { PersonType } from '../types';
 
 type ProfileProps = {
   className?: string;
-  person?: IPerson;
+  person?: PersonType;
 };
 
 const Profile = ({ person, ...props }: ProfileProps) => {

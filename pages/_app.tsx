@@ -1,7 +1,7 @@
 import { ApolloProvider } from '@apollo/client';
-import Navbar from '../src/components/Navbar';
 import Head from 'next/head';
 import { client } from '../src/graphql';
+import Navbar from '../src/components/Navbar';
 import '../public/styles/tailwind.css';
 
 const MyApp = ({ Component, pageProps }) => (

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_PERSON_QUERY } from '../../src/graphql';
-import { IPerson } from '../../src/interfaces';
+import { PersonType } from '../../src/types';
 import Profile from '../../src/components/Profile';
 
 type PersonVars = {
@@ -10,7 +10,7 @@ type PersonVars = {
 };
 
 type IPersonResponse = {
-  Person?: IPerson;
+  Person?: PersonType;
 };
 
 const ProfilePage = () => {

@@ -1,16 +1,20 @@
 import Indicator from './Indicator';
-import { IPerson } from '../interfaces';
+import { PersonType } from '../types';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 type PeopleListProps = {
   isLoading?: boolean;
   error: boolean;
-  data: IPerson[];
+  data: PersonType[];
+  hasMore?: boolean;
+  fetchMore?: () => void;
   onSelect?: (id: string) => void;
 };
 
 const defaultProps: PeopleListProps = {
   isLoading: true,
   error: false,
+  hasMore: false,
   data: [],
 };
 
@@ -18,7 +22,7 @@ const PersonField = ({
   data,
   onClick,
 }: {
-  data: IPerson;
+  data: PersonType;
   onClick: (id: string) => void;
 }) => {
   const specie = data.species[0]?.name;
@@ -51,24 +55,34 @@ const PeopleList: React.FC<PeopleListProps> = ({
   isLoading,
   data,
   error,
+  hasMore,
+  fetchMore,
   onSelect,
-}: PeopleListProps) => (
-  <ul>
-    {data.map((d) => (
-      <PersonField key={d.id} data={d} onClick={onSelect} />
-    ))}
-    {isLoading && (
-      <li className="p-8 text-2xl leading-8 text-light text-center font-bold">
-        Loading ...
-      </li>
-    )}
-    {!isLoading && error && (
-      <li className="p-8 text-2xl leading-8 text-emphasis text-center font-bold">
-        Failed to Load Data
-      </li>
-    )}
-  </ul>
-);
+}: PeopleListProps) => {
+  return (
+    <ul>
+      <InfiniteScroll
+        dataLength={data.length}
+        next={fetchMore}
+        hasMore={hasMore}
+        loader={
+          <li className="p-8 text-2xl leading-8 text-light text-center font-bold">
+            Loading...
+          </li>
+        }
+      >
+        {data.map((d) => (
+          <PersonField key={d.id} data={d} onClick={onSelect} />
+        ))}
+      </InfiniteScroll>
+      {!isLoading && error && (
+        <li className="p-8 text-2xl leading-8 text-emphasis text-center font-bold">
+          Failed to Load Data
+        </li>
+      )}
+    </ul>
+  );
+};
 
 PeopleList.defaultProps = defaultProps;
 
